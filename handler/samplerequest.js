@@ -1,8 +1,7 @@
 const handler={};
-handler.sampleRequest=(req,res)=>{
-    console.log("This is root route");
-
-    res.end("This is root route");
+handler.sampleRequest=(requestproperties,callback)=>{
+    
+    callback(200,{message:"This is root route"})
 }
 
 module.exports=handler

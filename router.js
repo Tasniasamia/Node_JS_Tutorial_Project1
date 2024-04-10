@@ -1,7 +1,8 @@
 const handler=require('./handler/samplerequest');
+const {sampleRequest}=handler
 
 const route={
-    sample:handler.sampleRequest
+    sample:sampleRequest
 }
 
 

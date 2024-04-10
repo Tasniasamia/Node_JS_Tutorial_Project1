@@ -10,17 +10,23 @@ const handleRequest=(req,res)=>{
     const method=req.method.toLowerCase();
     const headers=req.headers;
     console.log(trimePath);
-    
-    const currentRequest = route[trimePath] ? route[trimePath] : notFoundRequest;
-    currentRequest(req,res)
-    // currentRequest=(requestproperties,(statuscode,payload)=>{
-    // const status= statuscode === 200 ? statuscode : 500;
-    // const data=payload?payload:{}
-    // res.writeHead(status);
-    // res.end(data);
+    const requestproperties= {
+        path,
+        pathName,
+        trimePath,
+        method,
+        headers
+    }
+    let currentRequest = route[trimePath] ? route[trimePath] : notFoundRequest;
+    // currentRequest(req,res)
+    currentRequest(requestproperties, (statuscode,payload)=>{
+    let status= typeof statuscode === "number" ? statuscode : 500;
+    let payloaddata= typeof payload === "object"? payload : {}
+    res.writeHead(status);
+    res.write(JSON.stringify(payloaddata));
      
-    // })
-  console.log(typeof currentRequest);
+    })
+//   console.log(typeof currentRequest);
    
     
     req.on('data',(buffer)=>{
@@ -29,6 +35,7 @@ const handleRequest=(req,res)=>{
 
     req.on('end',()=>{
     decoder.end();
+    res.end();
 
  })
    
