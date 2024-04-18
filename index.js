@@ -3,7 +3,7 @@ const handleRequest=require('./helpers/handlerequest');
 const environment=require('./helpers/environment');
 const lib=require('./lib/data')
 const app={}
-lib.createFile("user","product",{name:"Samia",roll:1224}, function callback(e){
+lib.deleteFile("user","product", function callback(e){
 console.log(e)
 })
 app.createServer=()=>{
