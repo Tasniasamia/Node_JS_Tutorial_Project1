@@ -2,7 +2,7 @@ const url=require('url');
 const {StringDecoder} =require('string_decoder');
 const decoder=new StringDecoder('utf-8');
 const route=require('../router');
-const {notFoundRequest}=require('../handler/notfoundrequest')
+const {notFoundRequest}=require('../handler/notfoundrequest');
 const handleRequest=(req,res)=>{
     const path=url.parse(req.url, true);
     const pathName=path.pathname
