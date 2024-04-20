@@ -1,8 +1,11 @@
 const handler=require('./handler/samplerequest');
-const {sampleRequest}=handler
+const userHandler=require('./handler/userRequst');
+const {sampleRequest}=handler;
+const {useHandleRequest}=userHandler
 
 const route={
-    sample:sampleRequest
+    sample:sampleRequest,
+    user:useHandleRequest
 }
 
 
