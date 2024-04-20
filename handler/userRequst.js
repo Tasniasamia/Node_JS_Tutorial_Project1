@@ -1,8 +1,10 @@
 // hashPassword
 const {hashPassword}=require('../helpers/utilities');
+const {parseJSON}=require('../helpers/utilities');
 const file=require('../lib/data');
 const userHandler={};
 userHandler.useHandleRequest=(requestproperties,callback)=>{
+
 let method=['get','post','put','delete'];
 if(method.includes(requestproperties.method)){
     userHandler.userRequest[requestproperties.method](requestproperties,callback)
@@ -51,6 +53,29 @@ userHandler.userRequest.post=(requestproperties,callback)=>{
     }
 
     }
+userHandler.userRequest.get=(requestproperties,callback)=>{
+const phone=typeof requestproperties?.queryString?.phone === "string" && requestproperties?.queryString?.phone.trim() &&requestproperties?.queryString?.phone.length>0 ? requestproperties?.queryString?.phone : false;
+console.log("phone",phone);
+
+if(phone){
+file.readFile('user',phone, (err,payload)=>{
+    console.log(payload,err);
+    
+    if(!err && payload){
+    const userData2={...parseJSON(payload)}
+    delete userData2?.password
+    callback(204,userData2);
+    }
+    else{
+     callback(408,{message:"NO Data"})
+    }
+})
+}
+else{
+    callback(407)
+
+}
+}
  module.exports=userHandler;
 
 
