@@ -94,7 +94,7 @@ const handleRequest = (req, res) => {
             payload = typeof payload === 'object' ? payload : {};
 
             const payloadString = JSON.stringify(payload);
-
+            console.log(payloadString);
             res.setHeader('Content-Type', 'application/json');
             res.writeHead(statusCode);
             res.end(payloadString);

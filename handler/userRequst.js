@@ -64,7 +64,7 @@ file.readFile('user',phone, (err,payload)=>{
     if(!err && payload){
     const userData2={...parseJSON(payload)}
     delete userData2?.password
-    callback(204,userData2);
+    callback(200,userData2);
     }
     else{
      callback(408,{message:"NO Data"})
